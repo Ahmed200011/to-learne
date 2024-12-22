@@ -8,5 +8,6 @@
 </head>
 <body>
 add data
+<a href="{{route('contact')}}">go to</a>
 </body>
 </html>

@@ -6,20 +6,31 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    // dd(env('APP_NAME'));
-    return view('welcome');
-});
 
-Route::get('/Contact-us',[ContactUsController::class, 'index']);
+    return view('welcome');
+
+});
+Route::get('/{user}', function ($user) {
+    // dd(env('APP_NAME'));
+    return view('welcome',compact('user'));
+    // return view('welcome');
+});
+Route::get('/{user}', function ($user) {
+    return view('welcome',compact('user'));
+})->where('user','[A-Z]+');
+
+Route::get('/Contact-us',[ContactUsController::class, 'index'])->name('contact');
 
 Route::prefix('news')->controller(NewsController::class)->group(function (){
-    Route::get('all','index');
+    Route::get('all','index')->middleware('throttle:test');
     Route::get('add','add');
     Route::get('edit','edit');
     Route::get('delete','delete');
 });
 
-
+Route::fallback(function(){
+    return view('no.path404');
+});
 
 
 
