@@ -10,11 +10,11 @@ Route::get('/', function () {
     return view('welcome');
 
 });
-Route::get('/{user}', function ($user) {
+Route::get('/aa/{age}', function ($age) {
     // dd(env('APP_NAME'));
-    return view('welcome',compact('user'));
+    echo "ahmed is $age";
     // return view('welcome');
-});
+})->middleware('is_young');
 Route::get('/{user}', function ($user) {
     return view('welcome',compact('user'));
 })->where('user','[A-Z]+');
