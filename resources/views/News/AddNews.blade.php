@@ -12,18 +12,23 @@
 
 <body>
     <div class="container">
+
         <form action={{ route('news.store') }} method="post">
             @csrf
             <div class="mb-3">
                 <label for="exampleInput" class="form-label">title</label>
                 <input type="text" class="form-control" id="exampleInput" "
                     name="title">
+                    @error('title')
+                 
+                        {{$messages}}
+                    @enderror
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="example" class="form-label">News</label>
                 <textarea class="form-control" rows="10" cols="30" id="example" name="news"></textarea>
-                
+
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
