@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsController as ControllersNewsController;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('welcome');
+});
+Route::get('ahmed', function () {
+
+    return view('ahmed');
 });
 // Route::get('/aa/{age}', function ($age) {
 //     // dd(env('APP_NAME'));
@@ -39,7 +44,8 @@ Route::get('/', function () {
 // });
 
 
-// Route::resource('Products', ProductController::class);
+Route::resource('Products', ProductController::class);
+Route::resource('category', CategoryController::class);
 
 Route::resource('news', NewsController::class);
 Route::get('/dashboard', function () {

@@ -15,6 +15,7 @@
     <div class="container">
         {{-- @dd($news) --}}
         <a href={{ route('news.create') }} class="card-link btn btn-success">add news</a>
+        
         @foreach ($news as $item)
             <div class="card ">
                 <div class="card-body">

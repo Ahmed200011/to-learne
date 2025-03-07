@@ -10,13 +10,13 @@
 </head>
 
 <body>
-<form action="{{route('Products.store')}}" method="post" enctype="multipart/form-data">
-@dd($product->id)
+<form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
+
 @csrf
 
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Name</label>
-      <input type="text" class="form-control" id="exampleInputEmail1"  name="name">
+      <label for="exampleInputName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="exampleInputName"  name="name">
       @error('name')
         {{$message}}
       @enderror
