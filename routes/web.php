@@ -1,39 +1,53 @@
 <?php
 
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NewsController as ControllersNewsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
     return view('welcome');
-
 });
-Route::get('/aa/{age}', function ($age) {
-    // dd(env('APP_NAME'));
-    echo "ahmed is $age";
-    // return view('welcome');
-})->middleware('is_young');
-Route::get('/{user}', function ($user) {
-    return view('welcome',compact('user'));
-})->where('user','[A-Z]+');
+Route::get('ahmed', function () {
 
-Route::get('/Contact-us',[ContactUsController::class, 'index'])->name('contact');
-
-Route::prefix('news')->controller(NewsController::class)->group(function (){
-    Route::get('all','index')->middleware('throttle:test');
-    Route::get('add','add');
-    Route::get('edit','edit');
-    Route::get('delete','delete');
+    return view('ahmed');
 });
+// Route::get('/aa/{age}', function ($age) {
+//     // dd(env('APP_NAME'));
+//     echo "ahmed is $age";
+//     // return view('welcome');
+// })->middleware('is_young');
+// Route::get('/{user}', function ($user) {
+//     return view('welcome', compact('user'));
+// })->where('user', '[A-Z]+');
 
-Route::fallback(function(){
-    return view('no.path404');
-});
+// Route::get('/Contact-us', [ContactUsController::class, 'index'])->name('contact');
+// Route::get('user/all', [UserController::class, 'index']);
+// Route::get('user/add', [UserController::class, 'add']);
+
+// Route::prefix('news')->controller(NewsController::class)->group(function () {
+//     Route::get('all', 'index')->middleware('throttle:test');
+//     Route::get('add', 'add');
+//     Route::get('edit', 'edit');
+//     Route::get('delete', 'delete');
+// });
+
+// Route::resource('branch',BranchController::class);
+// Route::fallback(function () {
+//     return view('no.path404');
+// });
 
 
+Route::resource('Products', ProductController::class);
+Route::resource('category', CategoryController::class);
 
+Route::resource('news', NewsController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(middleware: ['auth', 'verified'])->name('dashboard');
@@ -44,4 +58,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
