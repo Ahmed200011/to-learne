@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code');
             $table->text('description');
-            // $table->foreignId('category_id')->nullable()->constrained('categories','id');
+            $table->foreignId('parent_category_id')->nullable()->constrained('categories','id');
 
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
