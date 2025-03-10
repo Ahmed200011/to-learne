@@ -54,4 +54,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'product_user', 'user_id', 'product_id', 'id', 'id');
     }
+    public function Image(){
+        return $this->morphOne(Image::class, 'imageable');
+     }
 }
