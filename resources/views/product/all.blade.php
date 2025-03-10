@@ -17,22 +17,26 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">name</th>
-                <th scope="col">code</th>
-                <th scope="col">description</th>
-                <th scope="col">image</th>
-                <th scope="col">status</th>
+                <th scope="col">price</th>
+                <th scope="col">product category</th>
+                {{-- <th scope="col">image</th>
+                <th scope="col">status</th> --}}
                 <th scope="col">option</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($Products as $product)
+            {{-- @dd($Products) --}}
+            @foreach ($Products as $key=> $product)
             <tr>
-                    <th scope="row">1</th>
+
+                    <th scope="row">{{$key+1}}</th>
                     <td>{{$product->name}}</td>
-                    <td>{{$product->code}}</td>
-                    <td>{{$product->description}}</td>
-                    <td><img src="{{ asset('images/'. $product->image) }}" width="150px" height="150px" alt=""> </td>
-                    <td>{{$product->status}}</td>
+                    <td>{{$product->price}}</td>
+
+                    <td>{{$product->category->name}}</td>
+                    <td>{{$product?->category?->parent?->name}}</td>
+                    {{-- <td><img src="{{ asset('images/'. $product->image) }}" width="150px" height="150px" alt=""> </td>
+                    <td>{{$product->status}}</td> --}}
 
                     <td>
                         {{-- <a href={{ route('Products.edit',  [$product->id]) }} class="card-link btn btn-info">Edit</a> --}}

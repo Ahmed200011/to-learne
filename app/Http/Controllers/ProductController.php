@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+      $Products=  Product::with(['category'=>['parent:id,name','children:id,name']])->get(); //Eager loading
+      return view('product.all',compact('Products'));
     }
 
     /**
