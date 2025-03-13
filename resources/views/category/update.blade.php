@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <img src="{{asset('storage/image/'.$category->image)}}" width="250px" height="250px" alt="">
     <form action="{{ route('category.update', [$category->id]) }}" method="post" enctype="multipart/form-data">
 
         @csrf
@@ -40,7 +41,7 @@
         </div>
         <div lass="input-group mb-3">
             <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" id="formFile" value="{{ $category->image }}" name="image">
+            <input class="form-control" type="file" id="formFile"  name="image">
             @error('image')
                 {{ $message }}
             @enderror

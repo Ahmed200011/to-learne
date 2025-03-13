@@ -52,7 +52,10 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->code }}</td>
                     <td>{{ $category->description }}</td>
-                    <td><img src="{{ asset('images/' . $category->image) }}" width="150px" height="150px"
+                    {{-- <td><img src="{{ asset('images/' . $category->image) }}" width="150px" height="150px"
+                            alt=""> </td> --}}
+                            {{-- @dd($category) --}}
+                    <td><img src="{{asset('storage/image/'.$category->image)  }}" width="250px" height="250px"
                             alt=""> </td>
                     <td>{{ $category->status }}</td>
 
@@ -76,6 +79,7 @@
 
         </tbody>
     </table>
+    {{$categories->links('pagination::bootstrap-5')}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>

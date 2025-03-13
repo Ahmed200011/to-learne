@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -21,7 +22,7 @@ class CategoryController extends Controller
             } else {
                 $model->where($request->select, 'like', "%$value%");
             }
-        })->get();
+        })->paginate(5);
         return view('category.all', compact('categories'));
     }
 
@@ -42,14 +43,25 @@ class CategoryController extends Controller
             'name' => 'required|max:20|min:4',
             // 'code' => 'required|max:10|min:4',
             'description' => 'required',
-            // 'image' => 'required',
+            'image' => 'required',
             'status' => 'required',
         ]);
+
+        if($request->hasFile('image')){
+            $file=$request->file('image');
+          $name= $request->file('image')->getClientOriginalName();
+          $image_name=uniqid().$name;
+          //   $storing=  $file->store('image','public');
+          $storing=  $file->move(public_path('storage/image'),$image_name);
+        //   dd($storing);
+
+        }
         Category::create([
             'name' => $request->name,
             'code' => $request->code,
             'description' => $request->description,
-            // 'image' => 'London to Paris',
+//اللي حصل ان ($storage)  بتجيب كامل المسار اللي موجود في الكمبيوتر عشان كدا عدلتها الي ($getfilename)
+            'image' => $storing->getFilename(),
             'status' => $request->status,
         ]);
         return redirect()->route('category.index')->with('massage', 'Product added successfully');
@@ -77,18 +89,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+
+        // dd($storing->getFilename());
+
         $request->validate([
             'name' => 'required|max:20|min:4',
             // 'code' => 'required|max:10|min:4',
             'description' => 'required',
-            // 'image' => 'required',
+            'image' => 'required',
             'status' => 'required',
         ]);
+        if($request->hasFile('image')){
+            $file=$request->file('image');
+            $name= $request->file('image')->getClientOriginalName();
+            $image_name=uniqid().$name;
+
+            //   $storing=  $file->store('image','public');
+            $storing=  $file->move(public_path('storage/image'),$image_name);
+            unlink(public_path('storage/image/'.$category->image));
+            // Storage::disk('public')->delete('storage/image/'.$category->image);
+        }
         $category->update([
             'name' => $request->name,
             'code' => $request->code,
             'description' => $request->description,
-            // 'image' => 'London to Paris',
+            'image' =>  $storing->getFilename(),
             'status' => $request->status,
         ]);
         return redirect()->route('category.index')->with('massage', 'Product Updated successfully');
@@ -99,6 +124,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        unlink(public_path('storage/image/'.$category->image));
         $category->delete();
         return redirect()->route('category.index')->with('massage', 'Product Deleted successfully');
     }

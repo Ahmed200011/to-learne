@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'code' => $this->faker->unique()->randomNumber(),
+            'image' => fake()->imageUrl(250, 250,'nature', true, 'Fake Image'),
             'description' => $this->faker->text(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
