@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder
         //                 Task::factory(15)->create(['project_id' => $project->id]);
         //             });
         //     });
-
-        User::factory(10)->create()->each(function (User $user) {
-            UserProfile::factory(1)->create(['user_id' => $user->id]);
-        });
+        User::factory(10000)->create();
+        // User::factory(10)->create()->each(function (User $user) {
+        //     UserProfile::factory(1)->create(['user_id' => $user->id]);
+        // });
 
         Category::factory(10)->create()->each(function ($category) {
                 Product::factory(2)->create();

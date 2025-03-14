@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsController as ControllersNewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserStatusJobController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,6 +46,7 @@ Route::get('ahmed', function () {
 // });
 
 route::get('test',[AccessorMutatorController::class,'index']);
+route::get('status',[UserStatusJobController::class,'index']);
 
 Route::resource('Products', ProductController::class);
 Route::resource('category', CategoryController::class);
