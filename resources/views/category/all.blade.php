@@ -42,6 +42,9 @@
                 <th scope="col">description</th>
                 <th scope="col">image</th>
                 <th scope="col">status</th>
+                <th scope="col">products</th>
+                <th scope="col">parent</th>
+                <th scope="col">children</th>
                 <th scope="col">option</th>
             </tr>
         </thead>
@@ -58,6 +61,15 @@
                     <td><img src="{{asset('storage/image/'.$category->image)  }}" width="250px" height="250px"
                             alt=""> </td>
                     <td>{{ $category->status }}</td>
+
+                    <td>@foreach ($category->products as $p )
+                       {{$p->name}}
+                    @endforeach </td>
+                    <td>{{ $category->parent->name }}</td>
+                    <td>@foreach ($category->children as $p )
+                       ->{{$p->name}}
+                    @endforeach </td>
+                    {{-- <td>{{ $category->children->name }}</td> --}}
 
                     <td>
                         <div class="d-flex justify-content-around">

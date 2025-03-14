@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessorMutatorController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
@@ -43,6 +44,7 @@ Route::get('ahmed', function () {
 //     return view('no.path404');
 // });
 
+route::get('test',[AccessorMutatorController::class,'index']);
 
 Route::resource('Products', ProductController::class);
 Route::resource('category', CategoryController::class);
