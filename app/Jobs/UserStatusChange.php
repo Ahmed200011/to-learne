@@ -23,9 +23,10 @@ class UserStatusChange implements ShouldQueue
      */
     public function handle(): void
     {
-      $user_id= User::where('status',0)->pluck('id');
+      $user_id= User::where('status',1)->pluck('id');
       foreach($user_id as $id){
-        User::where('id',$id)->update(['status'=>1]);
+        User::where('id',$id)->update(['status'=>0]);
       }
+      
     }
 }

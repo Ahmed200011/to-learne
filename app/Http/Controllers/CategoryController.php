@@ -13,6 +13,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->all());
         $categories = Category::when($request->search, function ($model, $value) use ($request) {
             if ($request->select == '*') {
 
